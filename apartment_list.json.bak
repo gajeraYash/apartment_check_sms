@@ -5,26 +5,26 @@
         "floorplans": {
             "B4G": {
                 "id": "7207890",
-                "beds": "2",
-                "baths": "2",
                 "units": {}
             },
             "C1": {
                 "id": "7207892",
-                "beds": "3",
-                "baths": "2",
-                "units": {}
+                "units": {
+                    "10750049": {
+                        "number": "#9311",
+                        "sqft": "1,365 sqft",
+                        "available": "05/20/2022",
+                        "term": "9",
+                        "rent": "$2,129"
+                    }
+                }
             },
             "C2G-2": {
                 "id": "7207893",
-                "beds": "3",
-                "baths": "2",
                 "units": {}
             },
             "C3G": {
                 "id": "7207894",
-                "beds": "3",
-                "baths": "2",
                 "units": {}
             }
         }
