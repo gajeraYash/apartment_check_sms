@@ -18,7 +18,7 @@ else:
     logger.setLevel(logging.INFO)
 
 wrkdir = os.path.dirname(__file__)
-file = open(f"{wrkdir}/apartment_list.json","r+")
+file = open(os.path.join(wrkdir,"apartment_list.json"),"r+")
 data = json.load(file)
 file.close()
 noWindow = Options()
@@ -49,7 +49,10 @@ def unavailableUpdateNotify(apartment,floorplan, units):
             data[apartment]['floorplans'][floorplan]['units'].pop(i,None)
             
 def parcatwylie():
-    browser = webdriver.Chrome(options=noWindow)
+    if config("PROD",cast=bool):
+        browser = webdriver.Chrome(options=noWindow)
+    else:
+        browser = webdriver.Chrome(options=noWindow,executable_path=config("CHROMEDRIVER"))
     apt = data['parcatwylie']
     logging.info(apt)
     url = apt['url']
@@ -96,6 +99,6 @@ if __name__ == "__main__":
         logging.info("ARGS: ",apartment)
     parcatwylie()
     
-    with open(f'{wrkdir}/apartment_list.json', 'w') as file:
+    with open(os.path.join(wrkdir,"apartment_list.json"), 'w') as file:
         json.dump(data,file,indent=4)
        
