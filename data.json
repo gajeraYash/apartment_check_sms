@@ -1,0 +1,34 @@
+{
+    "parcatwylie": {
+        "url": "https://www.parcatwylie.com/Floor-plans.aspx",
+        "floorplans": {
+            "B2": {
+                "id": "7207888",
+                "units": {
+                    "10749981": {
+                        "number": "#8204",
+                        "sqft": "1,138 sqft",
+                        "available": "06/18/2022",
+                        "term": "9",
+                        "rent": "$1,929"
+                    },
+                    "10749984": {
+                        "number": "#8306",
+                        "sqft": "1,138 sqft",
+                        "available": "08/06/2022",
+                        "term": "9",
+                        "rent": "$1,929"
+                    }
+                }
+            },
+            "C2G-2": {
+                "id": "7207893",
+                "units": {}
+            },
+            "C3G": {
+                "id": "7207894",
+                "units": {}
+            }
+        }
+    }
+}

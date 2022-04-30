@@ -1,0 +1,20 @@
+{
+    "parcatwylie": {
+        "name": "Parc at Wylie",
+        "url": "https://www.parcatwylie.com/Floor-plans.aspx",
+        "floorplans": {
+            "B2": {
+                "id": "7207888",
+                "units": {}
+            },
+            "C2G-2": {
+                "id": "7207893",
+                "units": {}
+            },
+            "C3G": {
+                "id": "7207894",
+                "units": {}
+            }
+        }
+    }
+}
