@@ -23,6 +23,7 @@ data = json.load(file)
 file.close()
 noWindow = Options()
 noWindow.headless = True
+noWindow.add_argument("--disable-dev-shm-usage")
 
 def checkUpdateNotify(available,apartment,floorplan,unit_id="",jsonBlock=""):
     if available:
@@ -49,10 +50,7 @@ def unavailableUpdateNotify(apartment,floorplan, units):
             data[apartment]['floorplans'][floorplan]['units'].pop(i,None)
             
 def parcatwylie():
-    if config("PROD",cast=bool):
-        browser = webdriver.Chrome(executable_path=config("CHROMEDRIVER"))
-    else:
-        browser = webdriver.Chrome(options=noWindow,executable_path=config("CHROMEDRIVER"))
+    browser = webdriver.Chrome(options=noWindow,executable_path=config("CHROMEDRIVER"))
     apt = data['parcatwylie']
     logging.info(apt)
     url = apt['url']
