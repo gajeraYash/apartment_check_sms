@@ -50,9 +50,9 @@ def unavailableUpdateNotify(apartment,floorplan, units):
             
 def parcatwylie():
     if config("PROD",cast=bool):
-        browser = webdriver.Chrome()
+        browser = webdriver.Chrome(executable_path=config("CHROMEDRIVER"))
     else:
-        browser = webdriver.Chrome(options=noWindow)
+        browser = webdriver.Chrome(options=noWindow,executable_path=config("CHROMEDRIVER"))
     apt = data['parcatwylie']
     logging.info(apt)
     url = apt['url']
