@@ -3,8 +3,12 @@
         "name": "Parc at Wylie",
         "url": "https://www.parcatwylie.com/Floor-plans.aspx",
         "floorplans": {
-            "B2": {
-                "id": "7207888",
+            "B4G": {
+                "id": "7207890",
+                "units": {}
+            },
+            "C1":{
+                "id": "7207892",
                 "units": {}
             },
             "C2G-2": {
