@@ -1,4 +1,4 @@
-import time, sys, bs4, json, logging
+import time, sys, bs4, json, logging, os
 from decouple import config
 from selenium import webdriver
 from datetime import datetime
@@ -17,7 +17,8 @@ if config("DEBUG",cast=bool):
 else:
     logger.setLevel(logging.INFO)
 
-file = open("apartment_list.json","r+")
+wrkdir = os.path.dirname(__file__)
+file = open(f"{wrkdir}/apartment_list.json","r+")
 data = json.load(file)
 file.close()
 noWindow = Options()
@@ -95,6 +96,6 @@ if __name__ == "__main__":
         logging.info("ARGS: ",apartment)
     parcatwylie()
     
-    with open('apartment_list.json', 'w') as file:
+    with open('{wrkdir}/apartment_list.json', 'w') as file:
         json.dump(data,file,indent=4)
        
