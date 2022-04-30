@@ -31,10 +31,10 @@ def checkUpdateNotify(available,apartment,floorplan,unit_id="",jsonBlock=""):
             new_data = jsonBlock[unit_id]
             if old_data != new_data:
                 data[apartment]['floorplans'][floorplan]['units'].update(jsonBlock)
-                alert(f"Apartment Update\n{('-'*20)}\nName: {data[apartment]['name']}\nFloorplan: {floorplan}\nUnit#: {jsonBlock[unit_id]['number']}\nSQFT: {jsonBlock[unit_id]['sqft']}\nTerm: {jsonBlock[unit_id]['term']}\nRent: {jsonBlock[unit_id]['rent']}")
+                print(f"Apartment Update\n{('-'*20)}\nName: {data[apartment]['name']}\nFloorplan: {floorplan}\nUnit#: {jsonBlock[unit_id]['number']}\nSQFT: {jsonBlock[unit_id]['sqft']}\nTerm: {jsonBlock[unit_id]['term']}\nRent: {jsonBlock[unit_id]['rent']}")
         else:
             data[apartment]['floorplans'][floorplan]['units'].update(jsonBlock)
-            alert(f"Apartment Update\n{('-'*20)}\nName: {data[apartment]['name']}\nFloorplan: {floorplan}\nUnit#: {jsonBlock[unit_id]['number']}\nSQFT: {jsonBlock[unit_id]['sqft']}\nTerm: {jsonBlock[unit_id]['term']}\nRent: {jsonBlock[unit_id]['rent']}")
+            print(f"Apartment Update\n{('-'*20)}\nName: {data[apartment]['name']}\nFloorplan: {floorplan}\nUnit#: {jsonBlock[unit_id]['number']}\nSQFT: {jsonBlock[unit_id]['sqft']}\nTerm: {jsonBlock[unit_id]['term']}\nRent: {jsonBlock[unit_id]['rent']}")
     else:
         pass
 
@@ -45,7 +45,7 @@ def unavailableUpdateNotify(apartment,floorplan, units):
             storedUnits.remove(unit)
         for i in storedUnits:
             alertinfo = data[apartment]['floorplans'][floorplan]['units'][i]
-            alert(f"Apartment Update\n{('-'*20)}\nName: {data[apartment]['name']}\nFloorplan: {floorplan}\nUnit#: {alertinfo['number']}\nSQFT: {alertinfo['sqft']}\nUNAVAILABLE")
+            print(f"Apartment Update\n{('-'*20)}\nName: {data[apartment]['name']}\nFloorplan: {floorplan}\nUnit#: {alertinfo['number']}\nSQFT: {alertinfo['sqft']}\nUNAVAILABLE")
             data[apartment]['floorplans'][floorplan]['units'].pop(i,None)
             
 def parcatwylie():
@@ -55,7 +55,7 @@ def parcatwylie():
     url = apt['url']
     logging.info(url)
     browser.get(url)
-    time.sleep(1)
+    time.sleep(5)
     html = browser.page_source
     soup = bs4.BeautifulSoup(html,features="html.parser")
     for i in apt['floorplans']:
@@ -96,6 +96,6 @@ if __name__ == "__main__":
         logging.info("ARGS: ",apartment)
     parcatwylie()
     
-    with open('{wrkdir}/apartment_list.json', 'w') as file:
+    with open(f'{wrkdir}/apartment_list.json', 'w') as file:
         json.dump(data,file,indent=4)
        
