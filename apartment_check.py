@@ -32,10 +32,14 @@ def checkUpdateNotify(available,apartment,floorplan,unit_id="",jsonBlock=""):
             new_data = jsonBlock[unit_id]
             if old_data != new_data:
                 data[apartment]['floorplans'][floorplan]['units'].update(jsonBlock)
-                alert(f"Apartment Update\n{('-'*20)}\nName: {data[apartment]['name']}\nFloorplan: {floorplan}\nUnit#: {jsonBlock[unit_id]['number']}\nBeds: {data[apartment]['floorplans'][floorplan]['beds']}\nBeds: {data[apartment]['floorplans'][floorplan]['baths']}\nSQFT: {jsonBlock[unit_id]['sqft']}\nTerm: {jsonBlock[unit_id]['term']}\nRent: {jsonBlock[unit_id]['rent']}")
+                alert(f"""Apartment Update\n{('-'*20)}\nName: {data[apartment]['name']}\nFloorplan: {floorplan}\nUnit#: {jsonBlock[unit_id]['number']}\n
+                Beds: {data[apartment]['floorplans'][floorplan]['beds']}\nBeds: {data[apartment]['floorplans'][floorplan]['baths']}\n
+                SQFT: {jsonBlock[unit_id]['sqft']}\nTerm: {jsonBlock[unit_id]['term']}\nRent: {jsonBlock[unit_id]['rent']}\nAvailable: {jsonBlock[unit_id]['available']}""")
         else:
             data[apartment]['floorplans'][floorplan]['units'].update(jsonBlock)
-            alert(f"Apartment Update\n{('-'*20)}\nName: {data[apartment]['name']}\nFloorplan: {floorplan}\nUnit#: {jsonBlock[unit_id]['number']}\nBeds: {data[apartment]['floorplans'][floorplan]['beds']}\nBeds: {data[apartment]['floorplans'][floorplan]['baths']}\nSQFT: {jsonBlock[unit_id]['sqft']}\nTerm: {jsonBlock[unit_id]['term']}\nRent: {jsonBlock[unit_id]['rent']}")
+            alert(f"""Apartment Update\n{('-'*20)}\nName: {data[apartment]['name']}\nFloorplan: {floorplan}\nUnit#: {jsonBlock[unit_id]['number']}\n
+            Beds: {data[apartment]['floorplans'][floorplan]['beds']}\nBeds: {data[apartment]['floorplans'][floorplan]['baths']}\n
+            SQFT: {jsonBlock[unit_id]['sqft']}\nTerm: {jsonBlock[unit_id]['term']}\nRent: {jsonBlock[unit_id]['rent']}\nAvailable: {jsonBlock[unit_id]['available']}""")
     else:
         pass
 
