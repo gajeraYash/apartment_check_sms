@@ -25,6 +25,11 @@ noWindow = Options()
 noWindow.headless = True
 noWindow.add_argument("--disable-dev-shm-usage")
 
+def notify(name, fp, unit, beds, baths, sqft, term, rent, available):
+    message = f"Apartment Update\n{'-'*25}\nName: {name}\nFloorplan: {fp}\nUnit: {unit}\neds: {beds}\nBaths: {baths}\nSQFT: {sqft}\nTerm: {term}\nRent: {rent}\nAvailable: {available}\n{'-'*25}\n"
+    logging.info(alert(message))
+
+
 def checkUpdateNotify(available,apartment,floorplan,unit_id="",jsonBlock=""):
     if available:
         if unit_id in data[apartment]['floorplans'][floorplan]['units']:
@@ -32,10 +37,14 @@ def checkUpdateNotify(available,apartment,floorplan,unit_id="",jsonBlock=""):
             new_data = jsonBlock[unit_id]
             if old_data != new_data:
                 data[apartment]['floorplans'][floorplan]['units'].update(jsonBlock)
-                alert(f"Apartment Update\n{('-'*20)}\nName: {data[apartment]['name']}\nFloorplan: {floorplan}\nUnit#: {jsonBlock[unit_id]['number']}\nBeds: {data[apartment]['floorplans'][floorplan]['beds']}\nBeds: {data[apartment]['floorplans'][floorplan]['baths']}\nSQFT: {jsonBlock[unit_id]['sqft']}\nTerm: {jsonBlock[unit_id]['term']}\nRent: {jsonBlock[unit_id]['rent']}\nAvailable: {jsonBlock[unit_id]['available']}")
+                notify(name=data[apartment]['name'], fp=floorplan, unit=jsonBlock[unit_id]['number'],beds=data[apartment]['floorplans'][floorplan]['beds'],
+                baths=data[apartment]['floorplans'][floorplan]['baths'],sqft=jsonBlock[unit_id]['sqft'],term=jsonBlock[unit_id]['term'],rent=jsonBlock[unit_id]['rent'],
+                available=jsonBlock[unit_id]['available'])
         else:
             data[apartment]['floorplans'][floorplan]['units'].update(jsonBlock)
-            alert(f"Apartment Update\n{('-'*20)}\nName: {data[apartment]['name']}\nFloorplan: {floorplan}\nUnit#: {jsonBlock[unit_id]['number']}\nBeds: {data[apartment]['floorplans'][floorplan]['beds']}\nBeds: {data[apartment]['floorplans'][floorplan]['baths']}\nSQFT: {jsonBlock[unit_id]['sqft']}\nTerm: {jsonBlock[unit_id]['term']}\nRent: {jsonBlock[unit_id]['rent']}\nAvailable: {jsonBlock[unit_id]['available']}")
+            notify(name=data[apartment]['name'], fp=floorplan, unit=jsonBlock[unit_id]['number'],beds=data[apartment]['floorplans'][floorplan]['beds'],
+                baths=data[apartment]['floorplans'][floorplan]['baths'],sqft=jsonBlock[unit_id]['sqft'],term=jsonBlock[unit_id]['term'],rent=jsonBlock[unit_id]['rent'],
+                available=jsonBlock[unit_id]['available'])
     else:
         pass
 
@@ -46,7 +55,8 @@ def unavailableUpdateNotify(apartment,floorplan, units):
             storedUnits.remove(unit)
         for i in storedUnits:
             alertinfo = data[apartment]['floorplans'][floorplan]['units'][i]
-            alert(f"Apartment Update\n{('-'*20)}\nName: {data[apartment]['name']}\nFloorplan: {floorplan}\nUnit#: {alertinfo['number']}\nBeds: {data[apartment]['floorplans'][floorplan]['beds']}\nBeds: {data[apartment]['floorplans'][floorplan]['baths']}\nSQFT: {alertinfo['sqft']}\nUNAVAILABLE")
+            notify(available='False',name=data[apartment]['name'],fp=floorplan, unit=alertinfo['number'],beds=data[apartment]['floorplans'][floorplan]['beds'],
+            baths=data[apartment]['floorplans'][floorplan]['baths'],sqft=alertinfo['sqft'],term=alertinfo['term'],rent=alertinfo['rent'])
             data[apartment]['floorplans'][floorplan]['units'].pop(i,None)
             
 def parcatwylie():
@@ -95,7 +105,9 @@ if __name__ == "__main__":
     apartment = sys.argv[1]
     if apartment == "parcatwylie":
         logging.info("ARGS: ",apartment)
-    parcatwylie()
+        parcatwylie()
+    #notify(name="Test",fp="IDK",unit="34243",beds="3",baths="4",sqft="1321",rent="$2312",term="9",available="04/01/2020")
+    
     
     with open(os.path.join(wrkdir,"apartment_list.json"), 'w') as file:
         json.dump(data,file,indent=4)
