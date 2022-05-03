@@ -66,7 +66,10 @@ def parcatwylie():
     url = apt['url']
     logging.info(url)
     browser.get(url)
-    time.sleep(5)
+    if config("PROD",cast=bool):
+        time.sleep(15)
+    else:
+        time.sleep(5)
     html = browser.page_source
     soup = bs4.BeautifulSoup(html,features="html.parser")
     for i in apt['floorplans']:
